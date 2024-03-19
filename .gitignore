@@ -1,22 +1,24 @@
-# dependencies
-/node_modules
+# source
+lib
+sample
+test
+e2e
 
-# IDE
-/.idea
-/.awcache
-/.vscode
-.history
+jest.config.json
+index.ts
+plugin.ts
+package-lock.json
+.eslintignore
+.eslintrc.js
+tsconfig.json
+.prettierrc
+.circleci
+.github
 
 # misc
+renovate.json
 npm-debug.log
 .DS_Store
-
-# tests
-/coverage
-/.nyc_output
-
-# source
-dist
-index.js
-index.d.ts
-/sample
+.commitlintrc.json
+.release-it.json
+CONTRIBUTING.md

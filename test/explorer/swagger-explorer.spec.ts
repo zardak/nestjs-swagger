@@ -1394,6 +1394,7 @@ describe('SwaggerExplorer', () => {
           expect(routes[0].root.operationId).toEqual(
             `WithVersionController_foo`
           );
+          expect(routes[0].root.version).toEqual('1')
         });
 
         it('should use route version defined', () => {
@@ -1413,6 +1414,7 @@ describe('SwaggerExplorer', () => {
           expect(routes[1].root.operationId).toEqual(
             `WithVersionController_bar`
           );
+          expect(routes[1].root.version).toEqual('2')
         });
 
         it('should use multiple versions defined', () => {
@@ -1434,6 +1436,7 @@ describe('SwaggerExplorer', () => {
           expect(routes[0].root.operationId).toEqual(
             `WithMultipleVersionsController_foo`
           );
+          expect(routes[0].root.version).toEqual(['3', '4']);
           expect(routes[1].root.path).toEqual(
             `/globalPrefix/v${
               CONTROLLER_MULTIPLE_VERSIONS[1] as string
@@ -1442,6 +1445,7 @@ describe('SwaggerExplorer', () => {
           expect(routes[1].root.operationId).toEqual(
             `WithMultipleVersionsController_foo`
           );
+          expect(routes[1].root.version).toEqual(['3', '4']);
         });
 
         it('should use multiple versions with neutral defined', () => {
@@ -1463,6 +1467,7 @@ describe('SwaggerExplorer', () => {
           expect(routes[0].root.operationId).toEqual(
             `WithMultipleVersionsNeutralController_foo`
           );
+          expect(routes[0].root.version).toEqual(['5', VERSION_NEUTRAL]);
 
           expect(routes[1].root.path).toEqual(
             `/globalPrefix/modulePath/with-multiple-version-neutral`
@@ -1470,6 +1475,7 @@ describe('SwaggerExplorer', () => {
           expect(routes[1].root.operationId).toEqual(
             `WithMultipleVersionsNeutralController_foo`
           );
+          expect(routes[1].root.version).toEqual(['5', VERSION_NEUTRAL]);
         });
       });
 
@@ -1638,7 +1644,7 @@ describe('SwaggerExplorer', () => {
     describe('and controller/route versions are not defined', () => {
       const DEFAULT_VERSION: VersionValue = '1';
 
-      @Controller('with-multiple-version')
+      @Controller('without-version')
       class WithoutVersionsController {
         @Get()
         foo(): void {}
@@ -1661,9 +1667,11 @@ describe('SwaggerExplorer', () => {
           'globalPrefix'
         );
 
-        expect(routes[0].root!.path).toEqual(
-          `/globalPrefix/v${DEFAULT_VERSION}/modulePath/with-multiple-version`
+        expect(routes[0].root.path).toEqual(
+          `/globalPrefix/v${DEFAULT_VERSION}/modulePath/without-version`
         );
+
+        expect(routes[0].root.version).toEqual('1');
       });
     });
   });

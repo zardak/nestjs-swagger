@@ -8,6 +8,7 @@ import * as SwaggerParser from 'swagger-parser';
 import { DocumentBuilder, SwaggerModule } from '../lib';
 import { ApplicationModule } from './src/app.module';
 import * as path from 'path';
+import { VersioningType } from '@nestjs/common';
 
 describe('Express Swagger', () => {
   let app: NestExpressApplication;
@@ -74,6 +75,17 @@ describe('Express Swagger', () => {
     await app.init();
     expect(app.getHttpAdapter().getInstance()).toBeDefined();
     await app.close();
+  });
+
+  it('should respect apiVersion', async () => {
+    app.enableVersioning({ type: VersioningType.HEADER, header: 'X-Version' });
+
+    const document = SwaggerModule.createDocument(app, builder.build(), { apiVersion: '2' });
+
+    expect(document.paths['/versioned']).toBeDefined();
+    expect(document.paths['/versioned-v2-v3']).toBeDefined();
+    expect(document.paths['/versioned-neutral']).toBeDefined();
+    expect(document.paths['/versioned-v3']).not.toBeDefined();
   });
 
   describe('served swagger ui', () => {

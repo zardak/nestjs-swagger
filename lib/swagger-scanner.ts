@@ -1,5 +1,6 @@
 import { INestApplication, InjectionToken, Type } from '@nestjs/common';
 import { MODULE_PATH } from '@nestjs/common/constants';
+import { VERSION_NEUTRAL } from '@nestjs/common/interfaces';
 import { ApplicationConfig, NestContainer } from '@nestjs/core';
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
 import { Module } from '@nestjs/core/injector/module';
@@ -90,6 +91,17 @@ export class SwaggerScanner {
             operationIdFactory
           )
         );
+
+        if (options.apiVersion) {
+          result = result.filter((moduleRoute) =>
+            Array.isArray(moduleRoute.root.version)
+              ? moduleRoute.root.version.includes(options.apiVersion) ||
+                moduleRoute.root.version.includes(VERSION_NEUTRAL)
+              : moduleRoute.root.version === options.apiVersion ||
+                moduleRoute.root.version === VERSION_NEUTRAL
+          );
+        }
+
         return this.transformer.unescapeColonsInPath(app, result);
       }
     );

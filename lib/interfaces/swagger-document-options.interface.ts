@@ -31,4 +31,9 @@ export interface SwaggerDocumentOptions {
    * @default () => controllerKey_methodKey
    */
   operationIdFactory?: OperationIdFactory;
+
+  /**
+   * If set, only include routes that support provided version
+   */
+  apiVersion?: string;
 }

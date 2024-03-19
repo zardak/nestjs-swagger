@@ -39,6 +39,120 @@
         }
       }
     },
+    "/api/v1/versioned": {
+      "get": {
+        "operationId": "AppController_getVersioned",
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/versioned": {
+      "get": {
+        "operationId": "AppController_getVersioned",
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v2/versioned-v2-v3": {
+      "get": {
+        "operationId": "AppController_getVersionedV2andV3",
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v3/versioned-v2-v3": {
+      "get": {
+        "operationId": "AppController_getVersionedV2andV3",
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v3/versioned-v3": {
+      "get": {
+        "operationId": "AppController_getVersionedV3",
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/versioned-neutral": {
+      "get": {
+        "operationId": "AppController_getVersionedNeutral",
+        "parameters": [
+          {
+            "name": "x-tenant-id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/v1/alias1": {
       "get": {
         "operationId": "AppController_withAliases",

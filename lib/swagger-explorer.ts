@@ -318,6 +318,7 @@ export class SwaggerExplorer {
               instance,
               method
             )}_${meth.toLowerCase()}`,
+            version: versionOrVersions,
             ...apiExtension
           }));
         }
@@ -326,6 +327,7 @@ export class SwaggerExplorer {
           method: RequestMethod[requestMethod].toLowerCase(),
           path: fullPath === '' ? '/' : fullPath,
           operationId: this.getOperationId(instance, method, pathVersion),
+          version: versionOrVersions,
           ...apiExtension
         };
       })
@@ -496,7 +498,7 @@ export class SwaggerExplorer {
     metatype: Type<unknown> | Function,
     versioningOptions: VersioningOptions | undefined
   ): VersionValue | undefined {
-    if (versioningOptions?.type === VersioningType.URI) {
+    if (versioningOptions) {
       return (
         Reflect.getMetadata(VERSION_METADATA, metatype) ??
         versioningOptions.defaultVersion
